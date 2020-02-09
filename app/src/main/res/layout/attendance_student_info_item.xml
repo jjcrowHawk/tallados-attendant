@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/colorPrimary"
+              android:layout_marginBottom="1dp" android:id="@+id/item_take_att_layout_parent">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp" app:srcCompat="@drawable/kid_placeholder"
+            android:id="@+id/iv_student_image_asi" android:layout_weight="0.30" android:layout_marginStart="5dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="30dp">
+        <TextView
+                android:text="Juan Pueblo Pelotero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tv_student_name_asi" android:textSize="19sp"
+                android:textStyle="bold" android:textColor="@android:color/background_light"
+                android:layout_marginTop="10dp"/>
+        <TextView
+                android:text="estado asistencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/tv_attendance_state_asi" android:textSize="17.5sp"
+                android:textStyle="bold|italic" android:textColor="@android:color/background_dark"
+                android:layout_marginTop="12dp" android:textAllCaps="true" android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:animateLayoutChanges="true" android:layout_marginBottom="7dp">
+
+    <TextView
+            android:id="@+id/section_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/section_recycler_view"
+            android:layout_alignParentLeft="true"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="18sp" android:text="label" android:layout_alignBottom="@id/section_show_all_button"/>
+
+    <Button
+            android:id="@+id/section_show_all_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorPrimary"
+            android:paddingBottom="8dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:text="ocultar"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"/>
+
+    <!--  recycler view for items -->
+    <View
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorButtonNormal"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="0dp" android:layout_below="@+id/section_show_all_button"/>
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/section_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/divider4"
+            android:layout_marginTop="7dp"
+    >
+    </androidx.recyclerview.widget.RecyclerView>
+</RelativeLayout>

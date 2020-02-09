@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Asistencias">
+        <menu>
+            <item
+                    android:id="@+id/take_attendace_menu"
+                    android:title="Tomar asistencia"/>
+            <item
+                    android:id="@+id/edit_attendace_menu"
+                    android:title="Editar asistencia"/>
+            <item
+                    android:id="@+id/report_attendace_menu"
+                    android:title="Reporte de asistencias"/>
+            <item
+                    android:id="@+id/export_attendace_menu"
+                    android:title="Exportar asistencias"/>
+        </menu>
+    </item>
+
+
+    <item android:title="Niños">
+        <menu>
+            <item
+                    android:id="@+id/info_student_menu"
+                    android:title="Ver info de niño"/>
+            <item
+                    android:id="@+id/add_student_menu"
+                    android:title="Agregar Niño"/>
+            <item
+                    android:id="@+id/change_course_student_menu"
+                    android:title="Cambiar de Grupo"/>
+            <item
+                    android:id="@+id/import_students_menu"
+                    android:title="Importar listas"/>
+        </menu>
+    </item>
+    <item android:title="Grupos">
+        <menu>
+            <item
+                    android:id="@+id/info_courses_menu"
+                    android:title="Ver grupos asignados"/>
+
+        </menu>
+    </item>
+</menu>

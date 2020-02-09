@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" android:layout_weight="1" android:background="@color/colorPrimary"
+              android:layout_marginBottom="1dp" android:id="@+id/item_take_att_layout_parent">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent" app:srcCompat="@drawable/kid_placeholder"
+            android:id="@+id/ati_iv_student_image" android:layout_weight="0.30" android:layout_marginStart="5dp"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="30dp">
+        <TextView
+                android:text="Juan Pueblo Pelotero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/ati_tv_student_name" android:textSize="19sp"
+                android:textStyle="bold" android:textColor="@android:color/background_light"
+                android:layout_marginTop="10dp"/>
+        <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:orientation="horizontal" android:layout_marginTop="5dp"
+                android:id="@+id/ati_rg_statuses" android:layout_weight="1" android:layout_marginBottom="10dp">
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp" android:id="@+id/ati_radio_unknown" android:layout_weight="0.25"
+                    android:button="@drawable/unknown_radio_button_icon"
+                    android:gravity="center"
+                    android:contentDescription="unknown" android:checked="false"
+            />
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/ati_radio_sick" android:layout_weight="0.25"
+                    android:button="@drawable/sick_radio_button_icon" android:contentDescription="sick"/>
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/ati_radio_absent" android:layout_weight="0.25"
+                    android:button="@drawable/absent_radio_button_icon" android:contentDescription="absent"/>
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/ati_radio_present"
+                    android:layout_weight="0.25"
+                    android:button="@drawable/present_radio_button_icon" android:contentDescription="present"/>
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

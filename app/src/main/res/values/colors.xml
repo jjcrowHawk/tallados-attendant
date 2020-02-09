@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#3F51B5</color>
+    <color name="colorAccent">#FF9800</color>
+
+    <!-- STATES COLORS -->
+    <color name="presentState">#41C545</color>
+    <color name="absentState">#E91E63</color>
+    <color name="sickState">#FF9800</color>
+    <color name="unknownState">#673AB7</color>
+</resources>

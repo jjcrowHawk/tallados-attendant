@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Tallados Asistencia</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="show_button">Mostrar</string>
+    <string name="hide_button">Ocultar</string>
+
+    <string name="present_state">presente</string>
+    <string name="absent_state">ausente</string>
+    <string name="sick_state">enfermo</string>
+    <string name="unknown_state">desconocido</string>
+
+    <string name="all_year">Todo el año</string>
+    <string name="all_month">Todo el mes</string>
+    <string name="custom">Por rango de fecha</string>
+</resources>
