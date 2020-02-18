@@ -26,6 +26,7 @@ class ExportAttendanceViewModel(application: Application) : AndroidViewModel(app
     var date_from_label: MutableLiveData<String> = MutableLiveData("")
     var date_to_label: MutableLiveData<String> = MutableLiveData("")
     var selected_course: Course? = null
+    var attendances_students_map: Map<Attendance,List<AttendanceRecordStudent>>?= null
 
     val showSelectDateButtons : MutableLiveData<Boolean> = MutableLiveData(true)
     val showExportingDialog: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -86,7 +87,8 @@ class ExportAttendanceViewModel(application: Application) : AndroidViewModel(app
 
     }
 
-    suspend fun getAttendancesData(): Map<Attendance,List<AttendanceRecordStudent>>?{
+    suspend fun generateAttendancesData(){
+
         val attendances : List<Attendance> = repository.getAttendancesFromCourseWithDateRange(selected_course!!.course_id,
             date_from,
             date_to)
@@ -103,11 +105,13 @@ class ExportAttendanceViewModel(application: Application) : AndroidViewModel(app
                 Log.i("VMEXPRT", "Attendance ${e.key.date} with records: ${e.value}")
             }
 
-            return map_attendance_record
+            attendances_students_map= map_attendance_record
         }
 
-        return null
+
     }
+
+
 
     fun exportAttendanceToXLS(){
 

@@ -26,22 +26,16 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
 import kotlinx.android.synthetic.main.dialog_waiting.view.*
 import org.cbe.talladosatendant.R
-import org.cbe.talladosatendant.databases.entities.Course
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class Utils{
 
     companion object{
-        fun getSampleCourses() : ArrayList<Course>{
-            return arrayListOf<Course>(
-                Course(name = "Niños de 3 - 4 años"),
-                Course(name = "Niños de 5 - 6 años"),
-                Course(name = "Niños de 7 - 8 años"),
-                Course(name ="Niños de 9 - 11 años")
-                )
-        }
+
+        /*
+         Date util Methods
+         */
 
         fun getMonthNameFromNumber(month:Int) : String{
             when(month){
@@ -81,6 +75,40 @@ class Utils{
             val dayName= getDayNameFromNumber(cal.get(Calendar.DAY_OF_WEEK))
             return "$dayName, ${cal.get(Calendar.DAY_OF_MONTH)} de $month del ${cal.get(Calendar.YEAR)}"
         }
+
+        fun getDiffYears(first: Date?, last: Date?): Int {
+            val a: Calendar = getCalendar(first)
+            val b: Calendar = getCalendar(last)
+            var diff: Int = b.get(Calendar.YEAR) - a.get(Calendar.YEAR)
+            if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) ||
+                a.get(Calendar.MONTH) === b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE)
+            ) {
+                diff--
+            }
+            return diff
+        }
+
+        fun getCalendar(date: Date?): Calendar {
+            val cal: Calendar = Calendar.getInstance()
+            cal.setTime(date)
+            return cal
+        }
+
+        fun getNearestDateOfWeekDay(day: Int,from: Date) : Date{
+            val cal_from= getCalendar(from)
+            while (cal_from.get(Calendar.DAY_OF_WEEK) != day) {
+                cal_from.add(Calendar.DATE, 1)
+            }
+            Log.i("UTILS","nearest date got: ${getFormattedLatinDate(cal_from.time)}")
+            return cal_from.time
+        }
+
+
+
+
+        /*
+         List View util Methods
+         */
 
         fun setListViewFullHeight(listView: ListView) {
             if(listView.adapter.count == 0)
@@ -132,23 +160,9 @@ class Utils{
             gridView.layoutParams = params
         }
 
-        fun getDiffYears(first: Date?, last: Date?): Int {
-            val a: Calendar = getCalendar(first)
-            val b: Calendar = getCalendar(last)
-            var diff: Int = b.get(Calendar.YEAR) - a.get(Calendar.YEAR)
-            if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) ||
-                a.get(Calendar.MONTH) === b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE)
-            ) {
-                diff--
-            }
-            return diff
-        }
-
-        fun getCalendar(date: Date?): Calendar {
-            val cal: Calendar = Calendar.getInstance()
-            cal.setTime(date)
-            return cal
-        }
+        /*
+         Dialog Util Methods
+         */
 
         fun showWaitingDialog(context: Context, text : String= "") : Dialog{
             val inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

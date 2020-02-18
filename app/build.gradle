@@ -20,6 +20,7 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
+            signingConfig signingConfigs.debug
         }
 
         release {
@@ -69,4 +70,17 @@ dependencies {
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation "com.github.SUPERCILEX.poi-android:poi:3.17"
+
+    //Google serivces
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    implementation('com.google.api-client:google-api-client-android:1.28.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude module: 'guava-jdk5'
+    }
+
+    implementation('com.google.apis:google-api-services-sheets:v4-rev571-1.25.0') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude module: 'guava-jdk5'
+    }
 }

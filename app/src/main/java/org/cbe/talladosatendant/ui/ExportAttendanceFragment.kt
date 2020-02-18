@@ -1,8 +1,11 @@
 package org.cbe.talladosatendant.ui
 
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -13,10 +16,25 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.Scope
+import com.google.api.client.extensions.android.http.AndroidHttp
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.api.client.util.ExponentialBackOff
+import com.google.api.services.sheets.v4.Sheets
+import com.google.api.services.sheets.v4.SheetsScopes
+import com.google.api.services.sheets.v4.model.Spreadsheet
+import com.google.api.services.sheets.v4.model.SpreadsheetProperties
 import kotlinx.coroutines.*
 
 import org.cbe.talladosatendant.R
 import org.cbe.talladosatendant.databases.entities.Course
+import org.cbe.talladosatendant.pojo.AttendancePeriod
+import org.cbe.talladosatendant.util.GoogleAuthManager
+import org.cbe.talladosatendant.util.SheetsManager
 import org.cbe.talladosatendant.util.Utils
 import org.cbe.talladosatendant.viewmodels.ExportAttendanceViewModel
 import java.util.*
@@ -38,12 +56,15 @@ class ExportAttendanceFragment : Fragment(), AdapterView.OnItemSelectedListener,
     private lateinit var btn_date_to: ImageButton
     private lateinit var btn_export: Button
     private lateinit var layout_custom_date: LinearLayout
-
     private var waiting_dialog: Dialog? = null
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
+
+    private lateinit var auth_manager: GoogleAuthManager
+    private lateinit var sheets_manager: SheetsManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +83,7 @@ class ExportAttendanceFragment : Fragment(), AdapterView.OnItemSelectedListener,
 
         spinner_course.isEnabled= false
         layout_custom_date.visibility= View.GONE
+
 
         return view
     }
@@ -165,31 +187,47 @@ class ExportAttendanceFragment : Fragment(), AdapterView.OnItemSelectedListener,
         btn_export.setOnClickListener{
             Log.i("ATTEXPRT","ready to export")
             viewModel.showExportingDialog.value= true
-            var attendances_records_map : Map<*,*>? = null
+            //var attendances_records_map : Map<*,*>? = null
             launch {
                 val deferred= async(Dispatchers.IO){
 
-                    attendances_records_map= viewModel.getAttendancesData()
+                   viewModel.generateAttendancesData()
                 }
 
                 deferred.await()
 
 
-                attendances_records_map?.let {
+                viewModel.attendances_students_map?.let {
                     waiting_dialog?.findViewById<TextView>(R.id.wd_title)?.text = "Generando hoja de reporte...."
-
-
+                    requestSheetApiSignIn(context!!)
 
                 } ?: run {
                     viewModel.showExportingDialog.value= false
                     viewModel.showNoDataFoundDialog.value= true
                 }
-
-
-
-
             }
 
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == GoogleAuthManager.REQUEST_SIGN_IN) {
+            if (resultCode == RESULT_OK) {
+                GoogleSignIn.getSignedInAccountFromIntent(data)
+                    .addOnSuccessListener { account ->
+                        Log.i("GOOGLE LOG IN","${account.displayName}")
+                        auth_manager.buildSheetService(account,context!!)?.let {
+                            createSheetReport(it)
+                        } ?: run{
+                            Log.i("ATTEXPRT", "Failed to get OAuth token")
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e("ERROR-DRIVE",e.toString())
+                    }
+            }
         }
     }
 
@@ -204,6 +242,55 @@ class ExportAttendanceFragment : Fragment(), AdapterView.OnItemSelectedListener,
         else if(parent!!.id == R.id.type_spinner_export){
             viewModel.setDateRange(viewModel.export_types[position])
             layout_custom_date.visibility= View.VISIBLE
+        }
+    }
+
+    private fun requestSheetApiSignIn(context: Context) {
+        /*
+        GoogleSignIn.getLastSignedInAccount(context)?.also { account ->
+            Timber.d("account=${account.displayName}")
+        }
+         */
+        auth_manager= GoogleAuthManager()
+
+        auth_manager.setUpSheetApiAuthClient(context)
+        auth_manager.signOutClient(context)
+        startActivityForResult(auth_manager.getClient().signInIntent, GoogleAuthManager.REQUEST_SIGN_IN)
+    }
+
+    private fun createSheetReport(service: Sheets, period: AttendancePeriod = AttendancePeriod.WEEKLY, period_value: Int = Calendar.SATURDAY) {
+        sheets_manager= SheetsManager(service)
+
+        launch(Dispatchers.Default) {
+            sheets_manager.createSpreadSheet("PROOF SPREAD SHEET")
+            Log.i("EXPORATT","passing to create title")
+            var sheet_title= viewModel.selected_course!!.name
+            sheets_manager.setSheetTitle(0,sheet_title)
+            sheets_manager.writeValueToMergedCells(sheet_title,1,1,0,6,"Asistencia Tallados - ${sheet_title}")
+
+            /* HEADER DATES CREATION */
+            if(period == AttendancePeriod.WEEKLY){
+                val start_date = Utils.getNearestDateOfWeekDay(period_value,viewModel.date_from)
+                val cal_start= Utils.getCalendar(start_date)
+
+                val start_month_col= 7
+                var next_col=7
+                while(cal_start.time.compareTo(viewModel.date_to) < 0){
+                    val curr_month= cal_start.get(Calendar.MONTH)
+                    sheets_manager.writeValueToCell(sheet_title,2,next_col,cal_start.get(Calendar.DAY_OF_MONTH))
+                    cal_start.add(Calendar.DATE,7)
+                        sheets_manager.writeValueToMergedCells(
+                            sheet_title,
+                            1,
+                            1,
+                            start_month_col,
+                            next_col,
+                            Utils.getMonthNameFromNumber(curr_month))
+                    }
+                    next_col++
+                }
+            }
+
         }
     }
 
