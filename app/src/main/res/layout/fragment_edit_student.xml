@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:windowBackground"
+        android:animateLayoutChanges="true"
+        tools:context=".ui.EditStudentFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:windowBackground"
+            android:id="@+id/frameLayout3"
+            android:animateLayoutChanges="true">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/linearLayout8" android:layout_marginTop="16dp" android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp">
+            <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="0.7">
+                <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/et_student_search_edit"
+                        android:layout_weight="0.8" android:hint="Ingrese el nombre del estudiante"
+                        android:layout_marginEnd="10dp" android:textSize="14sp"/>
+                <ImageButton
+                        android:src="@android:drawable/ic_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/btn_clear_search"
+                        android:layout_gravity="right|center_vertical"
+                        android:background="@android:drawable/screen_background_light_transparent"
+                        android:layout_marginEnd="10dp" android:layout_marginBottom="5dp" android:visibility="gone"/>
+            </FrameLayout>
+            <ImageButton
+                    android:src="@android:drawable/ic_menu_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/btn_search_student_edit"
+                    android:layout_weight="0.3"
+                    android:background="@color/colorAccent" android:layout_marginStart="5dp"/>
+        </LinearLayout>
+        <TextView
+                android:text="Editar Info de Niño"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView4" android:textAlignment="center"
+                android:textSize="@dimen/titles_size"
+                android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="match_parent"
+                                                           android:id="@+id/cl_container"
+                                                           app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+                                                           android:layout_marginTop="24dp" android:visibility="gone"
+                                                           android:animateLayoutChanges="true">
+            <FrameLayout
+                    android:layout_height="@dimen/image_add_size_height" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toTopOf="@+id/cl_container" android:id="@+id/frameLayout4"
+                    android:background="@android:color/darker_gray" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp" android:layout_width="@dimen/image_add_size_width">
+
+                <Button
+                        android:text=" Cambiar Foto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/btn_picture_edit"
+                        android:background="@android:drawable/screen_background_light_transparent"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:textAllCaps="false"/>
+                <ImageView
+                        android:src="@drawable/user_pic_placeholder"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/iv_student_edit"
+                        android:adjustViewBounds="true" android:scaleType="fitXY"/>
+            </FrameLayout>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_names_edit" android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toTopOf="@+id/cl_container" android:hint="Nombres"
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/frameLayout4"
+                    android:layout_marginStart="24dp"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_last_name_edit" android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/et_names_edit" android:layout_marginEnd="24dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:hint="Apellidos"
+                    app:layout_constraintStart_toEndOf="@+id/frameLayout4" android:layout_marginStart="24dp"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_address_edit" android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/frameLayout4" android:hint="Dirección"
+                    android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:ems="10"
+                    android:id="@+id/et_phone_edit" android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/et_address_edit" android:hint="Teléfono"
+                    android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"/>
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:ems="10"
+                    android:id="@+id/et_dob_edit"
+                    android:hint="Fecha de Nacimiento (dd/mm/aaaa)" android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/et_phone_edit" android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp" android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/et_dob_edit" android:layout_marginEnd="16dp"
+                    android:id="@+id/linearLayout6">
+                <TextView
+                        android:text="Edad:"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView14" android:layout_weight="0.2"
+                        android:textSize="18sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/tv_age_edit" android:layout_weight="1"
+                        android:textSize="18sp" android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout6" android:layout_marginTop="32dp"
+                    android:id="@+id/linearLayout7">
+
+                <TextView
+                        android:text="Curso Asignado:"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/textView15" android:layout_weight="0.4"
+                        android:textSize="18sp"/>
+                <Spinner
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/course_spinner_edit"
+                        android:layout_weight="0.6"/>
+            </LinearLayout>
+            <Button
+                    android:text="Actualizar Info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/btn_student_edit" android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout7" android:background="@color/colorPrimary"
+                    android:elevation="10dp" android:textColor="@android:color/white" android:includeFontPadding="false"
+                    android:paddingStart="20dp" android:paddingEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="24dp"/>
+            <Button
+                    android:text="Eliminar Estudiante"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/btn_student_delete" android:layout_marginTop="32dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout7" android:background="@color/absentState"
+                    android:elevation="10dp" android:textColor="@android:color/white" android:includeFontPadding="false"
+                    android:paddingStart="10dp" android:paddingEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="10dp"
+                    android:layout_marginStart="24dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -88,10 +88,10 @@ public abstract class AttendanceDatabase: RoomDatabase() {
             Log.i("DATABASE","REGISTERING DATA!")
 
             attendanceDatabase.courseDao().insertAll(
-                Course(course_id = 1, name = "Niños de 3 - 4 años"),
-                Course(course_id=2, name = "Niños de 5 - 6 años"),
-                Course(course_id=3, name = "Niños de 7 - 8 años"),
-                Course(course_id=4, name ="Niños de 9 - 11 años")
+                Course(course_id = 1, name = "Niños de 3 - 4 años",min_year_student = 3,max_year_student = 4),
+                Course(course_id=2, name = "Niños de 5 - 6 años",min_year_student = 5,max_year_student = 6),
+                Course(course_id=3, name = "Niños de 7 - 8 años",min_year_student = 7,max_year_student = 8),
+                Course(course_id=4, name ="Niños de 9 - 11 años",min_year_student = 9,max_year_student = 11)
             )
 
             attendanceDatabase.studentDao().insertAll(

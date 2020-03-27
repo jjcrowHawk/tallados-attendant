@@ -26,8 +26,8 @@ data class AttendanceRecord(
     @PrimaryKey(autoGenerate = true)
     val record_id: Int= 0,
     val observations: String="",
-    val student: Int,
-    val attendance: Int,
-    val status: Int
+    val student: Int= -1,
+    val attendance: Int= -1,
+    val status: Int= -1
 )
 

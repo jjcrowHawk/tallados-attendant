@@ -15,6 +15,7 @@ class AttendanceRepository(private val database: AttendanceDatabase) {
      */
 
     val courses : LiveData<List<Course>> = database.courseDao().getCourses()
+    val students: LiveData<List<Student>> = database.studentDao().getStudents()
 
     fun attendancesFromLastMonth() : LiveData<List<CourseAttendance>>{
         Log.i("REPOSITORY","GETTING LAST ATTENDANCES")
@@ -65,9 +66,21 @@ class AttendanceRepository(private val database: AttendanceDatabase) {
         return database.attendanceDao().update(attendance)
     }
 
-    /**
-     * Review Attendance
-     */
+	 /**
+	  * Edit Attendance
+	  */
+
+	 fun getTakenAttendancesFromCourse(course: Int,fromDate: Date,toDate: Date): LiveData<List<Attendance>>{
+		return database.attendanceDao().getAttendancesFromCourse(fromDate,toDate,course)
+	 }
+
+	 suspend fun updateAttendanceRecords(records: List<AttendanceRecord>) : Int{
+		return database.attendanceRecordDao().update(*records.toTypedArray())
+	 }
+
+	 /**
+	  * Review Attendance
+	  */
 
     fun getPastAttendancesFromCourse(fromDate: Date, toDate: Date, course: Int) : LiveData<List<CourseAttendance>>{
         return database.attendanceDao().getCourseAttendancesFromCourse(since=fromDate,to = toDate,course_id = course)
@@ -91,4 +104,66 @@ class AttendanceRepository(private val database: AttendanceDatabase) {
     suspend fun getRecordsFromAttendance(attendance_id: Int) : List<AttendanceRecordStudent>{
         return database.attendanceRecordDao().getSynRecordsFromAttendanceWithStudent(attendance_id)
     }
+
+    suspend fun getStudentsFromCourseSync(course:Int): List<Student>{
+        return database.studentDao().getStudentsByCourseSync(course)
+    }
+
+    /**
+     * Add Student
+     */
+
+    suspend fun addStudentToDatabase(student: Student): Long{
+        return database.studentDao().insert(student)
+    }
+
+    suspend fun addStudentCourseRow(student_course: StudentCourse) : Long{
+        return database.studentCourseDao().insert(student_course)
+    }
+
+    suspend fun getStudentSync(id:Int): Student{
+        return database.studentDao().getStudentSync(id)
+    }
+
+    suspend fun  updateStudentOnDatabase(student: Student): Int{
+        return database.studentDao().update(student)
+    }
+
+    /**
+     * Edit Student
+     */
+
+    suspend fun getStudentCourseByStudentSync(student_id: Int): List<StudentCourse>{
+        return database.studentCourseDao().getStudentCoursesByStudentSync(student_id)
+    }
+
+    suspend fun updateStudentCoursesRecords(student_courses: List<StudentCourse>) : Int{
+        return database.studentCourseDao().update(*student_courses.toTypedArray())
+    }
+
+    /**
+     * Import Student
+     */
+
+    suspend fun addStudentsRecords(students: List<Student>): List<Long>{
+        return database.studentDao().insertAll(*students.toTypedArray())
+    }
+
+    suspend fun addStudentCourseRowList(student_course: List<StudentCourse>) : List<Long>{
+        return database.studentCourseDao().insertAll(*student_course.toTypedArray())
+    }
+
+    /**
+     * View Student
+     */
+
+    suspend fun getStudentCourseRowsByStudentSync(student_id: Int): List<StudentCourse>{
+        return database.studentCourseDao().getStudentCourseIgnoringActiveByStudentSync(student_id)
+    }
+
+    suspend fun getCourseSync(course_id: Int): Course{
+        return database.courseDao().getCourseSync(course_id)
+    }
+
+
 }

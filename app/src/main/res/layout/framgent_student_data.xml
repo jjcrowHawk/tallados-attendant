@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".util.StudentDataFragment" android:orientation="vertical"
+              android:id="@+id/parent_layout_student_data"
+              android:textAlignment="viewStart">
+    <ImageView
+            android:src="@drawable/kid_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/imageView2"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="Nombres:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView9" android:layout_weight="0.41"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tv_name_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="Apellidos:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView10" android:layout_weight="0.4"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tv_lname_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="F. Nacimiento:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView11" android:layout_weight="0.13"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/tv_dob_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="Edad:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView12" android:layout_weight="0.43"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/tv_age_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="Dirección:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView13" android:layout_weight="0.4"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tv_address_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+                android:lines="2" android:gravity="center_vertical" android:ellipsize="marquee"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="Teléfono:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView14" android:layout_weight="0.43"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tv_phone_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+                android:maxLines="2"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_marginEnd="10dp"
+            android:layout_marginTop="14dp">
+        <TextView
+                android:text="Sección:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView15" android:layout_weight="0.48"
+                android:textSize="16sp" android:textAllCaps="false" android:textAlignment="viewStart"
+                android:textStyle="bold" android:layout_marginStart="20dp"/>
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/tv_course_st_data" android:layout_weight="1"
+                android:textSize="16sp" android:textAlignment="center" android:layout_marginStart="20dp"
+        />
+    </LinearLayout>
+    <TextView
+            android:text="Historial de Secciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView16" android:textAlignment="center"
+            android:layout_marginTop="30dp" android:textSize="18sp" android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+</LinearLayout>

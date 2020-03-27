@@ -3,6 +3,7 @@ package org.cbe.talladosatendant.databases.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(
     tableName = "student_course",
@@ -21,8 +22,9 @@ import androidx.room.PrimaryKey
 )
 data class StudentCourse(
     @PrimaryKey(autoGenerate = true)
-    val sc_id: Int,
+    val sc_id: Int = 0,
     val active: Boolean=true,
-    val student: Int,
-    val course: Int
+    val student: Int= -1,
+    val course: Int= -1,
+    val created_date: Date = Date()
 )

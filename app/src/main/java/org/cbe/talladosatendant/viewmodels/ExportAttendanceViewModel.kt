@@ -10,7 +10,9 @@ import org.cbe.talladosatendant.pojo.CourseAttendance
 import org.cbe.talladosatendant.util.AttendanceRepository
 import org.cbe.talladosatendant.R
 import org.cbe.talladosatendant.databases.entities.Attendance
+import org.cbe.talladosatendant.databases.entities.Student
 import org.cbe.talladosatendant.pojo.AttendanceRecordStudent
+import org.cbe.talladosatendant.pojo.AttendanceRecordWithStatus
 import org.cbe.talladosatendant.util.Utils
 import java.util.*
 
@@ -26,11 +28,15 @@ class ExportAttendanceViewModel(application: Application) : AndroidViewModel(app
     var date_from_label: MutableLiveData<String> = MutableLiveData("")
     var date_to_label: MutableLiveData<String> = MutableLiveData("")
     var selected_course: Course? = null
+    var students_course: List<Student>? = null
     var attendances_students_map: Map<Attendance,List<AttendanceRecordStudent>>?= null
 
     val showSelectDateButtons : MutableLiveData<Boolean> = MutableLiveData(true)
     val showExportingDialog: MutableLiveData<Boolean> = MutableLiveData(false)
     val showNoDataFoundDialog: MutableLiveData<Boolean> = MutableLiveData(false)
+    val showErrorDialog: MutableLiveData<Boolean> = MutableLiveData(false)
+    val showSuccesDialog: MutableLiveData<Boolean> = MutableLiveData(false)
+    var errorMessage: String = ""
 
     init {
         val database= AttendanceDatabase.getDatabase(application, viewModelScope)
@@ -97,10 +103,14 @@ class ExportAttendanceViewModel(application: Application) : AndroidViewModel(app
         if(attendances.isNotEmpty()) {
             val map_attendance_record: MutableMap<Attendance, List<AttendanceRecordStudent>> =
                 TreeMap(Comparator { a1, a2 -> a1.date.compareTo(a2.date) })
+
             for (attendance in attendances) {
                 val records = repository.getRecordsFromAttendance(attendance.attendance_id)
                 records.let { map_attendance_record[attendance] = records }
             }
+
+            students_course= repository.getStudentsFromCourseSync(selected_course!!.course_id)
+
             map_attendance_record.forEach { e ->
                 Log.i("VMEXPRT", "Attendance ${e.key.date} with records: ${e.value}")
             }
@@ -111,10 +121,5 @@ class ExportAttendanceViewModel(application: Application) : AndroidViewModel(app
 
     }
 
-
-
-    fun exportAttendanceToXLS(){
-
-    }
 
 }

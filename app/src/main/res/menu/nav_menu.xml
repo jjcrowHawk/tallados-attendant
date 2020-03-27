@@ -28,8 +28,8 @@
                     android:id="@+id/add_student_menu"
                     android:title="Agregar Niño"/>
             <item
-                    android:id="@+id/change_course_student_menu"
-                    android:title="Cambiar de Grupo"/>
+                    android:id="@+id/edit_student_menu"
+                    android:title="Editar Info de Niño"/>
             <item
                     android:id="@+id/import_students_menu"
                     android:title="Importar listas"/>

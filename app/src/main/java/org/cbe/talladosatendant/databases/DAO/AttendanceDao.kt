@@ -21,7 +21,7 @@ interface AttendanceDao {
     @Query("SELECT * FROM attendance WHERE (date BETWEEN :since AND :to) AND course = :course_id ORDER BY date ASC")
     fun getAttendancesFromCourse(since: Date, to:Date,course_id:Int): LiveData<List<Attendance>>
 
-    @Query("SELECT * FROM attendance WHERE (date BETWEEN :since AND :to) AND course = :course_id ORDER BY date ASC")
+    @Query("SELECT * FROM attendance WHERE taken = 1 AND (date BETWEEN :since AND :to) AND course = :course_id ORDER BY date ASC")
     suspend fun getSyncAttendancesFromCourse(since: Date, to:Date,course_id:Int): List<Attendance>
 
     @Query("SELECT * FROM attendance WHERE date BETWEEN :since AND :to")

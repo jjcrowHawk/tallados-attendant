@@ -15,6 +15,7 @@ import org.cbe.talladosatendant.R
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
 
@@ -22,6 +23,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLInputFactory", "com.fasterxml.aalto.stax.InputFactoryImpl")
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLOutputFactory", "com.fasterxml.aalto.stax.OutputFactoryImpl")
+        System.setProperty("org.apache.poi.javax.xml.stream.XMLEventFactory", "com.fasterxml.aalto.stax.EventFactoryImpl")
 
         drawerLayout = findViewById(R.id.drawer_layout)
         navView = findViewById(R.id.nav_view)
@@ -48,6 +53,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.take_attendace_menu -> f= TakeAttendanceFragment()
             R.id.report_attendace_menu -> f= ReviewAttendanceFragment()
             R.id.export_attendace_menu -> f= ExportAttendanceFragment()
+            R.id.edit_attendace_menu -> f= EditAttendanceFragment()
+            R.id.add_student_menu -> f= AddStudentFragment()
+            R.id.edit_student_menu -> f= EditStudentFragment()
+            R.id.import_students_menu -> f= ImportStudentListFragment()
+            R.id.info_student_menu -> f= ViewStudentFragment()
             else -> f = null
         }
         f?.let { replaceFragment(f) }

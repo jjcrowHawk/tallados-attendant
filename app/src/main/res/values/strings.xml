@@ -8,11 +8,38 @@
     <string name="hide_button">Ocultar</string>
 
     <string name="present_state">presente</string>
-    <string name="absent_state">ausente</string>
+    <string name="absent_state" translatable="false">ausente</string>
     <string name="sick_state">enfermo</string>
     <string name="unknown_state">desconocido</string>
 
     <string name="all_year">Todo el año</string>
-    <string name="all_month">Todo el mes</string>
+    <string name="all_month" translatable="false">Todo el mes</string>
     <string name="custom">Por rango de fecha</string>
+
+    <!--SHEET  REPORT FIELDS-->
+    <string-array name="sheet_fields">
+        <item name="number">No.</item>
+        <item name="full_name">Apellidos y Nombres</item>
+        <item name="picture">Foto</item>
+        <item name="age">Edad</item>
+        <item name="address">Dirección</item>
+        <item name="telephone">Telefono</item>
+        <item name="dob">Fecha de Nacimiento</item>
+        <item name="name">Nombre</item>
+        <item name="last_name">Apellidos</item>
+    </string-array>
+
+    <string-array name="sheet_results_fields">
+        <item name="total">Total de Asistencias</item>
+        <item name="justified">Faltas Justificadas</item>
+        <item name="attendance_perc">% Asistencia</item>
+    </string-array>
+
+    <!--IMPORT STUDENT STRINGS -->
+    <string name="unassignedStudentDialogTitle">Aviso al importar estudiantes</string>
+    <string name="unassignedStudentsMessage">Usted tiene estudiantes que no han sido asignados a ningún curso, tenga en
+        cuenta que si realiza la importación tendrá que asignarlos manualmente en la sección Editar Info. de Niño
+    </string>
+    <string name="importedStudentsDialogTitle">Niños y Niñas agregados con éxito!</string>
+
 </resources>

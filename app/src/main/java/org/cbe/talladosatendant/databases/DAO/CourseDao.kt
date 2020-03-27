@@ -10,6 +10,9 @@ interface CourseDao {
     @Query("SELECT * FROM course")
     fun getCourses() : LiveData<List<Course>>
 
+    @Query("SELECT * FROM course WHERE course_id == :course_id")
+    suspend fun getCourseSync(course_id:Int) : Course
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(course: Course)
 

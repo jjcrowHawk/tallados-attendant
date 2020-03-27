@@ -69,7 +69,10 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation "com.github.SUPERCILEX.poi-android:poi:3.17"
+    implementation("com.github.SUPERCILEX.poi-android:poi:3.17") {
+        exclude group: "org.codehaus.woodstox", module: "stax2-api"
+    }
+    // implementation 'com.fasterxml:aalto-xml:1.0.0'
 
     //Google serivces
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
@@ -83,4 +86,6 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
         exclude module: 'guava-jdk5'
     }
+
+    implementation 'com.github.DonMat:searchablespinner:v1.0.1'
 }
