@@ -107,7 +107,7 @@ class ViewStudentFragment : Fragment(), CoroutineScope {
 				viewModel.getStudentCourseInformation()
 			 }
 			 val attendance_request= async{
-				viewModel.getStudentAttendances()
+				viewModel.getStudentAttendances(context!!)
 			 }
 
 			 awaitAll(data_request,attendance_request)
@@ -119,6 +119,7 @@ class ViewStudentFragment : Fragment(), CoroutineScope {
 
 			 launch(Dispatchers.Main) {
 				shared_view_model.setStudentData(student_data)
+				shared_view_model
 				tab_layout.visibility = View.VISIBLE
 				vpager.visibility = View.VISIBLE
 			 }

@@ -6,6 +6,7 @@ import org.cbe.talladosatendant.databases.AttendanceDatabase
 import org.cbe.talladosatendant.databases.entities.*
 import org.cbe.talladosatendant.pojo.AttendanceRecordStudent
 import org.cbe.talladosatendant.pojo.CourseAttendance
+import org.cbe.talladosatendant.pojo.RecordWithAttendance
 import java.util.*
 
 class AttendanceRepository(private val database: AttendanceDatabase) {
@@ -163,6 +164,10 @@ class AttendanceRepository(private val database: AttendanceDatabase) {
 
     suspend fun getCourseSync(course_id: Int): Course{
         return database.courseDao().getCourseSync(course_id)
+    }
+
+    suspend fun getRecordsFromStudentSync(student_id: Int): List<RecordWithAttendance>{
+        return database.attendanceRecordDao().getSyncAttendanceRecordsFromStudent(student_id)
     }
 
 

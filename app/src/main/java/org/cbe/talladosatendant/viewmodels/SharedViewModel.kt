@@ -14,6 +14,8 @@ class SharedViewModel: ViewModel() {
     //Student Data Fragment
     private val student_data: MutableLiveData<Map<String,Any>> = MutableLiveData()
 
+    private val student_attendances: MutableLiveData<Map<String,Any>> = MutableLiveData()
+
 
     fun setSelectedCourse(c: CourseAttendance){
         selected_attendance.value= c
@@ -28,6 +30,14 @@ class SharedViewModel: ViewModel() {
     }
 
     fun getStudentDataLD() : LiveData<Map<String,Any>>{
+        return this.student_data
+    }
+
+    fun setStudentAttendance(data_map:Map<String,Any>){
+        this.student_data.value = data_map
+    }
+
+    fun getStudentAttendanceLD() : LiveData<Map<String,Any>>{
         return this.student_data
     }
 }

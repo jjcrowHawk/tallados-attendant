@@ -12,6 +12,13 @@
     <string name="sick_state">enfermo</string>
     <string name="unknown_state">desconocido</string>
 
+    <string-array name="attendance_statuses">
+        <string name="present">present</string>
+        <string name="absent">absent</string>
+        <string name="sick">sick</string>
+        <string name="unknown">unknown</string>
+    </string-array>
+
     <string name="all_year">Todo el año</string>
     <string name="all_month" translatable="false">Todo el mes</string>
     <string name="custom">Por rango de fecha</string>

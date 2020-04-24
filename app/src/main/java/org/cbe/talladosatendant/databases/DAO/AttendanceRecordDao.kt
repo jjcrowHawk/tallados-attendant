@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import org.cbe.talladosatendant.databases.entities.AttendanceRecord
 import org.cbe.talladosatendant.pojo.AttendanceRecordStudent
+import org.cbe.talladosatendant.pojo.RecordWithAttendance
 import java.util.*
 
 @Dao
@@ -28,6 +29,9 @@ interface AttendanceRecordDao {
 
     @Query("SELECT * FROM attendance_record WHERE attendance = :attendance_id")
     suspend fun getSynRecordsFromAttendanceWithStudent(attendance_id: Int) : List<AttendanceRecordStudent>
+
+    @Query("SELECT * FROM attendance_record INNER JOIN attendance ON attendance.attendance_id = attendance_record.attendance WHERE attendance_record.student = :student_id")
+    suspend fun getSyncAttendanceRecordsFromStudent(student_id: Int): List<RecordWithAttendance>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(record: AttendanceRecord) : Long
